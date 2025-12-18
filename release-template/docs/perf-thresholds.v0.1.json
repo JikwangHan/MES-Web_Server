@@ -1,0 +1,20 @@
+{
+  "regression_pct": 0,
+  "endpoints": {
+    "GET /api/echo": {
+      "p95_max_ms": 150,
+      "p99_max_ms": 250,
+      "avg_max_ms": 100
+    },
+    "GET /api/tenant/dbname": {
+      "p95_max_ms": 180,
+      "p99_max_ms": 300,
+      "avg_max_ms": 120
+    },
+    "POST /api/ingest/raw": {
+      "p95_max_ms": 250,
+      "p99_max_ms": 400,
+      "avg_max_ms": 180
+    }
+  }
+}
