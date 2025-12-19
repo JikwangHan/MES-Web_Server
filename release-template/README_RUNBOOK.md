@@ -186,3 +186,11 @@ WantedBy=multi-user.target
 - 실행(관리자 권한): `powershell -ExecutionPolicy Bypass -File .\scripts\register-daily-ops-task.ps1`
 - 기본 시간: 매일 02:10
 - 등록된 작업 확인: `schtasks /Query /TN "MES-OpsDailyCheck"`
+
+## 12-12. 백업 상태 점검(일간)
+- 실행: `powershell -ExecutionPolicy Bypass -File .\scripts\check-backup-health.ps1`
+- 로그: `C:\MES\ops\backup_health_YYYYMMDD_HHmm.log`
+
+## 12-13. 주간 운영 리포트
+- 실행: `powershell -ExecutionPolicy Bypass -File .\scripts\ops-weekly-report.ps1`
+- 결과: `C:\MES\ops\weekly_ops_report_YYYYMMDD_HHmm.md`

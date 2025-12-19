@@ -32,6 +32,8 @@ Copy-Item "$root\scripts\collect-evidence.ps1" "$workDir\scripts\collect-evidenc
 Copy-Item "$root\scripts\reboot-finalize.ps1" "$workDir\scripts\reboot-finalize.ps1" -Force
 Copy-Item "$root\scripts\post-reboot-verify.ps1" "$workDir\scripts\post-reboot-verify.ps1" -Force
 Copy-Item "$root\scripts\register-daily-ops-task.ps1" "$workDir\scripts\register-daily-ops-task.ps1" -Force
+Copy-Item "$root\scripts\check-backup-health.ps1" "$workDir\scripts\check-backup-health.ps1" -Force
+Copy-Item "$root\scripts\ops-weekly-report.ps1" "$workDir\scripts\ops-weekly-report.ps1" -Force
 
 # Windows 서비스 스크립트 동기화
 Copy-Item "$root\release-template\scripts\windows-service-install.ps1" "$workDir\scripts\windows-service-install.ps1" -Force
