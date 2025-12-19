@@ -102,7 +102,12 @@ try {
         $stamp = Get-Date -Format "yyyyMMdd_HHmm"
         $backupDir = "${DeployDir}_prev_$stamp"
         Write-Info "기존 폴더를 백업으로 이동합니다: $backupDir"
-        Move-Item -Force $DeployDir $backupDir
+        try {
+            Move-Item -Force $DeployDir $backupDir
+        } catch {
+            Write-Warn "기존 폴더 이동 실패. 사용 중인 프로세스가 있을 수 있습니다."
+            Write-Warn "가능하면 C:\\MES\\app\\mes-web 사용 중인 창/프로세스를 종료한 뒤 다시 실행하세요."
+        }
     }
     New-Item -ItemType Directory -Force -Path $DeployDir | Out-Null
 
