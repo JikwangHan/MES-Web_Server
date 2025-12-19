@@ -181,3 +181,8 @@ WantedBy=multi-user.target
 ## 12-10. 재부팅 후 원샷 마감
 - 실행: powershell -ExecutionPolicy Bypass -File .\scripts\reboot-finalize.ps1 -TagName ops-v0.4.1
 - 재부팅 직후 1회 실행으로 검증 로그 생성 + 릴리즈 노트 부록 반영까지 완료
+
+## 12-11. 일간 운영 점검 스케줄 등록
+- 실행(관리자 권한): `powershell -ExecutionPolicy Bypass -File .\scripts\register-daily-ops-task.ps1`
+- 기본 시간: 매일 02:10
+- 등록된 작업 확인: `schtasks /Query /TN "MES-OpsDailyCheck"`
