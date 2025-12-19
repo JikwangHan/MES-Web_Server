@@ -80,32 +80,40 @@ $notesPath = Join-Path $notesDir ("RELEASE_NOTES_{0}.md" -f $TagName)
 
 $commitList = git log -n 20 --pretty=format:"- %s (%h)"
 
-$notesContent = @"
-# Release Notes - $TagName
+$commitShort = git rev-parse --short HEAD
+$svcStatus = if ($svcInfo) { $svcInfo.Status } else { "N/A" }
+$svcStartType = if ($svcInfo) { $svcInfo.StartType } else { "N/A" }
+$perfCsvPath = if ($perfCsv) { $perfCsv.FullName } else { "N/A" }
+$perfGatePath = if ($perfGate) { $perfGate.FullName } else { "N/A" }
+$evidencePath = if ($evidenceZip) { $evidenceZip.FullName } else { "N/A" }
+$opsLogPath = if ($opsLog) { $opsLog.FullName } else { "N/A" }
+
+$notesTemplate = @'
+# Release Notes - {0}
 
 ## 1. 태그/커밋
-- Tag: $TagName
-- Branch: $branch
-- Commit: $(git rev-parse --short HEAD)
+- Tag: {0}
+- Branch: {1}
+- Commit: {2}
 
 ## 2. 변경 요약
-$commitList
+{3}
 
 ## 3. 운영 검증 결과
-- OPS_STATUS: $opsStatus
-- HEALTH: $health
-- PERF_GATE_EXITCODE: $perfGateExit
+- OPS_STATUS: {4}
+- HEALTH: {5}
+- PERF_GATE_EXITCODE: {6}
 
 ## 4. 증빙 경로
-- PERF_CSV: $($perfCsv.FullName)
-- PERF_GATE_JSON: $($perfGate.FullName)
-- EVIDENCE_ZIP: $($evidenceZip.FullName)
-- OPS_LOG: $($opsLog.FullName)
+- PERF_CSV: {7}
+- PERF_GATE_JSON: {8}
+- EVIDENCE_ZIP: {9}
+- OPS_LOG: {10}
 
 ## 5. 상태 스냅샷
-- Service: $($svcInfo.Status) / $($svcInfo.StartType)
+- Service: {11} / {12}
 - Port 8080:
-$port
+{13}
 
 ## 6. Known Issues
 - 없음
@@ -114,7 +122,13 @@ $port
 - ops-daily-check: `powershell -File .\scripts\ops-daily-check.ps1`
 - deploy-rehearsal: `powershell -File .\scripts\deploy-rehearsal.ps1 -ZipPath <latest>`
 - service check: `Get-Service -Name "MES-Web"`
-"@
+'@
+
+$notesContent = $notesTemplate -f `
+    $TagName, $branch, $commitShort, $commitList, `
+    $opsStatus, $health, $perfGateExit, `
+    $perfCsvPath, $perfGatePath, $evidencePath, $opsLogPath, `
+    $svcStatus, $svcStartType, $port
 
 $notesContent | Set-Content -Encoding UTF8 $notesPath
 
