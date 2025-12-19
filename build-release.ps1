@@ -29,6 +29,11 @@ Copy-Item "$root\scripts\perf-gate.ps1" "$workDir\scripts\perf-gate.ps1" -Force
 Copy-Item "$root\scripts\ops-daily-check.ps1" "$workDir\scripts\ops-daily-check.ps1" -Force
 Copy-Item "$root\scripts\diagnose-boot.ps1" "$workDir\scripts\diagnose-boot.ps1" -Force
 Copy-Item "$root\scripts\collect-evidence.ps1" "$workDir\scripts\collect-evidence.ps1" -Force
+Copy-Item "$root\scripts\post-reboot-verify.ps1" "$workDir\scripts\post-reboot-verify.ps1" -Force
+
+# Windows 서비스 스크립트 동기화
+Copy-Item "$root\release-template\scripts\windows-service-install.ps1" "$workDir\scripts\windows-service-install.ps1" -Force
+Copy-Item "$root\release-template\scripts\windows-service-uninstall.ps1" "$workDir\scripts\windows-service-uninstall.ps1" -Force
 
 # perf threshold 문서
 New-Item -ItemType Directory -Force -Path (Join-Path $workDir "docs") | Out-Null

@@ -40,6 +40,7 @@ if ($AutoCrypto) {
     }
 }
 
+if (-not $env:SPRING_PROFILES_ACTIVE) { $env:SPRING_PROFILES_ACTIVE = "local" }
 Write-Host "[INFO] JAVA_HOME:" $env:JAVA_HOME
 Write-Host "[INFO] 프로파일:" $env:SPRING_PROFILES_ACTIVE
 Write-Host "[INFO] 암호화키 ID:" $env:MES_CRYPTO_ACTIVE_KEY_ID
@@ -52,7 +53,8 @@ $logPath = Join-Path $logDir ("boot_run_{0}.log" -f $ts)
 
 # 애플리케이션 실행 (백그라운드) + health 폴링
 Set-Location "$PSScriptRoot"
-$proc = Start-Process -FilePath "java" -ArgumentList "-jar",".\mes-web.jar" -RedirectStandardOutput $logPath -RedirectStandardError $logPath -PassThru
+$errPath = Join-Path $logDir ("boot_run_{0}.err.log" -f $ts)
+$proc = Start-Process -FilePath "java" -ArgumentList "-Dspring.profiles.active=$($env:SPRING_PROFILES_ACTIVE)","-jar",".\mes-web.jar" -RedirectStandardOutput $logPath -RedirectStandardError $errPath -PassThru
 
 $baseUrl = "http://localhost:8080/actuator/health"
 $maxAttempts = 24

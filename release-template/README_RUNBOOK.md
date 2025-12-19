@@ -158,3 +158,22 @@ WantedBy=multi-user.target
   - 프로그램/스크립트: `powershell`
   - 인수: `-File C:\MES\dev\mes-web\mes-web\scripts\ops-daily-check.ps1`
   - '가장 높은 권한으로 실행' 체크 권장(도커 접근)
+
+## 12-8. Windows 서비스화(NSSM)
+- 설치(관리자 권한):
+  - `powershell -File .\scripts\windows-service-install.ps1 -AppHome "C:\MES\app\mes-web"`
+- 삭제(관리자 권한):
+  - `powershell -File .\scripts\windows-service-uninstall.ps1 -ServiceName "MES-Web"`
+- 재부팅 후 자동 기동 확인:
+  - `Get-Service -Name "MES-Web"`
+  - `Invoke-RestMethod http://localhost:8080/actuator/health`
+- 장애 확인 순서:
+  1) `powershell -File .\scripts\ops-daily-check.ps1`
+  2) 서비스 로그 확인: C:\MES\logs\mes-web-service.out.log / err.log
+  3) 포트 점유 확인: `netstat -ano | findstr :8080`
+- 서비스 설치 전 ops-daily-check 1회 PASS를 권장합니다.
+
+## 12-9. 재부팅 후 자동 기동 확인
+- 실행: `powershell -File .\scripts\post-reboot-verify.ps1`
+- 확인 항목: 서비스 상태, 8080 포트, health, 서비스 로그 tail
+- 참고 문서: `docs\REBOOT_CHECKLIST_v0.1.md`
