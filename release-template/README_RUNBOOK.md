@@ -194,3 +194,11 @@ WantedBy=multi-user.target
 ## 12-13. 주간 운영 리포트
 - 실행: `powershell -ExecutionPolicy Bypass -File .\scripts\ops-weekly-report.ps1`
 - 결과: `C:\MES\ops\weekly_ops_report_YYYYMMDD_HHmm.md`
+
+## 12-14. 디스크/로그 상태 점검(일간)
+- 실행: `powershell -ExecutionPolicy Bypass -File .\scripts\check-disk-log-health.ps1`
+- 기준: 디스크 여유 10GB 이상, 로그 5GB 이하
+
+## 12-15. 운영 대시보드 요약
+- 실행: `powershell -ExecutionPolicy Bypass -File .\scripts\ops-dashboard-summary.ps1`
+- 결과: `C:\MES\ops\ops_dashboard_YYYYMMDD_HHmm.md`

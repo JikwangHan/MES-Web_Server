@@ -34,6 +34,8 @@ Copy-Item "$root\scripts\post-reboot-verify.ps1" "$workDir\scripts\post-reboot-v
 Copy-Item "$root\scripts\register-daily-ops-task.ps1" "$workDir\scripts\register-daily-ops-task.ps1" -Force
 Copy-Item "$root\scripts\check-backup-health.ps1" "$workDir\scripts\check-backup-health.ps1" -Force
 Copy-Item "$root\scripts\ops-weekly-report.ps1" "$workDir\scripts\ops-weekly-report.ps1" -Force
+Copy-Item "$root\scripts\check-disk-log-health.ps1" "$workDir\scripts\check-disk-log-health.ps1" -Force
+Copy-Item "$root\scripts\ops-dashboard-summary.ps1" "$workDir\scripts\ops-dashboard-summary.ps1" -Force
 
 # Windows 서비스 스크립트 동기화
 Copy-Item "$root\release-template\scripts\windows-service-install.ps1" "$workDir\scripts\windows-service-install.ps1" -Force
