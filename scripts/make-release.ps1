@@ -14,7 +14,8 @@ function Write-Info { param([string]$m) Write-Host "[INFO] $m" }
 function Write-Err  { param([string]$m) Write-Host "[ERROR] $m" -ForegroundColor Red }
 
 # Git 상태 확인
-$root = Split-Path -Parent $MyInvocation.MyCommand.Path
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$root = Split-Path -Parent $scriptDir
 Set-Location $root
 
 $inside = git rev-parse --is-inside-work-tree 2>$null
