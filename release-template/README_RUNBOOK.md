@@ -202,3 +202,8 @@ WantedBy=multi-user.target
 ## 12-15. 운영 대시보드 요약
 - 실행: `powershell -ExecutionPolicy Bypass -File .\scripts\ops-dashboard-summary.ps1`
 - 결과: `C:\MES\ops\ops_dashboard_YYYYMMDD_HHmm.md`
+
+## 12-16. 백업 보관기간 정리(일간)
+- 실행: `powershell -ExecutionPolicy Bypass -File .\scripts\cleanup-old-backups.ps1`
+- 기본 보관기간: 30일
+- 로그: `C:\MES\ops\backup_cleanup_YYYYMMDD_HHmm.log`
