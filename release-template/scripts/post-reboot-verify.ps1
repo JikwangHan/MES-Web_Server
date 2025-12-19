@@ -70,7 +70,8 @@ if (Test-Path $errLog) {
 
 # 5) 요약 출력(고정 포맷)
 Write-Host "SERVICE_STATUS: $($svc.Status)"
-Write-Host "PORT_8080: $([string]::IsNullOrWhiteSpace($portLine) ? 'N/A' : 'LISTEN')"
+$portStatus = if ([string]::IsNullOrWhiteSpace($portLine)) { "N/A" } else { "LISTEN" }
+Write-Host "PORT_8080: $portStatus"
 Write-Host "HEALTH: $health"
 Write-Host "OUT_LOG_TAIL: $outLog"
 Write-Host "ERR_LOG_TAIL: $errLog"
