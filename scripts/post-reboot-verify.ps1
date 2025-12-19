@@ -15,6 +15,13 @@ $ProgressPreference = 'SilentlyContinue'
 function Write-Info { param([string]$m) Write-Host "[INFO] $m" }
 function Write-Warn { param([string]$m) Write-Host "[WARN] $m" -ForegroundColor Yellow }
 
+$timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
+$logPath = Join-Path $LogDir ("post_reboot_verify_{0}.log" -f $timestamp)
+
+# 콘솔 출력과 동일한 내용을 파일로 저장합니다.
+Start-Transcript -Path $logPath -Append | Out-Null
+
 Write-Info "재부팅 후 서비스 검증을 시작합니다."
 
 # 1) 서비스 상태 확인
@@ -67,3 +74,6 @@ Write-Host "PORT_8080: $([string]::IsNullOrWhiteSpace($portLine) ? 'N/A' : 'LIST
 Write-Host "HEALTH: $health"
 Write-Host "OUT_LOG_TAIL: $outLog"
 Write-Host "ERR_LOG_TAIL: $errLog"
+Write-Host "LOG_PATH: $logPath"
+
+Stop-Transcript | Out-Null
