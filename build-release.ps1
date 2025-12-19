@@ -29,6 +29,7 @@ Copy-Item "$root\scripts\perf-gate.ps1" "$workDir\scripts\perf-gate.ps1" -Force
 Copy-Item "$root\scripts\ops-daily-check.ps1" "$workDir\scripts\ops-daily-check.ps1" -Force
 Copy-Item "$root\scripts\diagnose-boot.ps1" "$workDir\scripts\diagnose-boot.ps1" -Force
 Copy-Item "$root\scripts\collect-evidence.ps1" "$workDir\scripts\collect-evidence.ps1" -Force
+Copy-Item "$root\scripts\reboot-finalize.ps1" "$workDir\scripts\reboot-finalize.ps1" -Force
 Copy-Item "$root\scripts\post-reboot-verify.ps1" "$workDir\scripts\post-reboot-verify.ps1" -Force
 
 # Windows 서비스 스크립트 동기화

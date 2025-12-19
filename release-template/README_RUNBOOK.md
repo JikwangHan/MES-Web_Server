@@ -177,3 +177,7 @@ WantedBy=multi-user.target
 - 실행: `powershell -File .\scripts\post-reboot-verify.ps1`
 - 확인 항목: 서비스 상태, 8080 포트, health, 서비스 로그 tail
 - 참고 문서: `docs\REBOOT_CHECKLIST_v0.1.md`
+
+## 12-10. 재부팅 후 원샷 마감
+- 실행: powershell -ExecutionPolicy Bypass -File .\scripts\reboot-finalize.ps1 -TagName ops-v0.4.1
+- 재부팅 직후 1회 실행으로 검증 로그 생성 + 릴리즈 노트 부록 반영까지 완료
